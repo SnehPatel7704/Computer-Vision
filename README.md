@@ -40,7 +40,6 @@ This project implements the required practical coding assignment covering Units 
 ## Run the assignment
 
 ```bash
-cd /Users/snehpatel/MIT/Git/Computer-Vision
 python3 -m venv .venv
 source .venv/bin/activate
 pip install "opencv-python<5" scikit-image matplotlib pandas ultralytics jupyter
@@ -65,8 +64,3 @@ For the clone step to work, push the notebook and required `data/` inputs to Git
 ## Git repository
 
 - GitHub: https://github.com/SnehPatel7704/Computer-Vision.git
-
-## Notes
-
-- Large raw videos should be stored outside Git (for example, in the instructor-provided Google Drive) and copied to `data/original_video.mp4` locally for analysis.
-- For a formal submission, upload the required project explanation video and final documentation to the Google Drive location provided by the instructor.

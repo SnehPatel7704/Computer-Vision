@@ -76,10 +76,10 @@ The measurements show that Gaussian filtering performs better for Gaussian noise
 
 The photo-based restoration, segmentation, feature extraction, and object-detection workflows were run on the supplied personal photograph. Haar detected one face and YOLO returned two object detections. SIFT produced 1,278 good matches on the initial pair, 1,259 after rotation, and 1,140 after resizing. Motion estimation was run on the supplied 54-frame clip, producing frame-difference, MOG2, and optical-flow visualizations.
 
-The feature-matching pair is derived from one photograph rather than two independently captured views, and the video clip is short (about 1.8 seconds). Replace/add suitable media if the instructor expects a separately captured image or longer recording. The explanation video still needs to be recorded and linked in the submission.
+The feature-matching pair is derived from one photograph rather than two independently captured views, and the video clip is short (about 1.8 seconds). 
 
 ## 8. Git repository and demonstration video
 
 - Git repository: https://github.com/SnehPatel7704/Computer-Vision.git
 - Project explanation video: To be uploaded to the Google Drive location provided by the instructor.
-- The supplied motion video is short (54 frames, approximately 1.8 seconds); capture a longer clip if the instructor expects it. The project explanation video still needs to be recorded and uploaded before final submission.
+- The supplied motion video is short (54 frames, approximately 1.8 seconds).
