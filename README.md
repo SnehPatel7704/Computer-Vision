@@ -35,11 +35,7 @@ This project implements the required practical coding assignment covering Units 
 ## Prerequisites
 
 - Python 3.10+
-- OpenCV
-- NumPy
-- Matplotlib
-- scikit-image
-- Ultralytics YOLO
+- Internet access for notebook package installation and model download
 
 ## Run the assignment
 
@@ -47,17 +43,24 @@ This project implements the required practical coding assignment covering Units 
 cd /Users/snehpatel/MIT/Git/Computer-Vision
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install "opencv-python<5" scikit-image matplotlib pandas ultralytics jupyter
 jupyter notebook Assignment_3_Computer_Vision.ipynb
 ```
 
-Run the notebook cells from top to bottom. The supplied `Sneh.heif` photograph is represented by `data/original_photo.png` and used for restoration, segmentation, features, and object detection. The notebook leaves the original input unchanged and derives a transformed pair for feature matching. It saves processed outputs into `results/`.
+Run the notebook cells from top to bottom. Its first code cell installs packages directly; no requirements file is used. In Colab, open the notebook from the GitHub link below. The setup cell clones this repository and uses the files in `data/` as inputs.
+
+The supplied `Sneh.heif` photograph is represented by `data/original_photo.png` and used for restoration, segmentation, features, and object detection. The notebook leaves the original input unchanged and derives a transformed pair for feature matching. It saves processed outputs into `results/`.
 
 The supplied `data/original_video.mp4` is used for motion analysis (720 × 1280, 54 frames at approximately 29.9 fps). The notebook validates and uses the file; it does not synthesize a substitute.
 
 ## Notebook / Colab
 
-Open `Assignment_3_Computer_Vision.ipynb` in Jupyter or upload it to Google Colab. For Colab, make the notebook, `data/`, and `requirements.txt` available in the runtime and set the working directory to the repository root before running cells. Avoid uploading personal photos or videos to a hosted runtime unless you are comfortable sharing them with that service.
+Open the notebook in Jupyter, or launch it directly in Colab:
+
+- [Open Assignment 3 in Google Colab](https://colab.research.google.com/github/SnehPatel7704/Computer-Vision/blob/main/Assignment_3_Computer_Vision.ipynb)
+
+The notebook clones this repository and reads the input photo/video from `data/`. It saves generated outputs in `results/`.
+For the clone step to work, push the notebook and required `data/` inputs to GitHub first; unauthenticated Colab cloning requires the repository to be publicly accessible. A public repository makes those photo/video files visible to anyone, so upload only media you consent to share.
 
 ## Git repository
 
