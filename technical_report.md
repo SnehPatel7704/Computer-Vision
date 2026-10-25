@@ -4,13 +4,16 @@
 
 The goal of this assignment is to implement core Computer Vision techniques from image restoration, segmentation, feature extraction, object recognition and motion estimation. The work follows the requirements of Units 3, 4 and 5 using Python with OpenCV, NumPy, Matplotlib, scikit-image and Ultralytics YOLO.
 
+All implementation and result presentation is contained in `Assignment_3_Computer_Vision.ipynb`; there is no separate Python pipeline file. Run the notebook from top to bottom.
+
 ## 2. Input data
 
-A synthetic dataset was generated for this assignment to ensure reproducibility and to avoid dependence on unavailable personal media.
+A personal photograph supplied for this assignment was used as the main image input. The HEIF source was converted to PNG for OpenCV compatibility. The feature-matching pair is derived from the same photograph by resizing it; this demonstrates scale/rotation robustness but is not a second independently captured photograph.
 
-- Original photograph: `data/original_photo.png`
-- Pair of matching scene images: `data/scene_a.png` and `data/scene_b.png`
-- Original self-recorded style video: `data/original_video.mp4`
+- Supplied original photograph: `Sneh.heif`
+- Processing copy: `data/original_photo.png` (4032 x 2268 pixels)
+- Matching pair derived from the supplied photograph: `data/scene_a.png` and `data/scene_b.png`
+- Motion-analysis video: `data/original_video.mp4` (supplied outdoor recording; 720 × 1280, 54 frames at approximately 29.9 fps, about 1.8 seconds)
 
 ## 3. Methods used
 
@@ -28,7 +31,7 @@ A synthetic dataset was generated for this assignment to ensure reproducibility 
 
 - HOG features were extracted and visualized.
 - SIFT keypoints and descriptors were computed.
-- Feature matching was performed between the two scene images.
+- Feature matching was performed between a scaled version of the supplied photo and a resized version of the same scene.
 - The matching experiment was repeated after resizing and rotating one image to compare robustness.
 
 ### 3.3 Object recognition and motion estimation
@@ -39,9 +42,11 @@ A synthetic dataset was generated for this assignment to ensure reproducibility 
 - Background subtraction using MOG2 was used to separate foreground from background.
 - Lucas-Kanade optical flow was used to estimate motion between consecutive frames.
 
+The Haar cascade found one face. YOLO produced two `person` boxes: a high-confidence detection on the person (about 0.91) and a low-confidence false positive on the fence/vegetation (about 0.33). This is the observed detector error case.
+
 ## 4. Output summary
 
-The processed results are stored in the `results/` folder and include:
+The processed results are stored in the `results/` folder. The combined contact sheet is `results/final_results_overview.png`; individual results include:
 
 - denoised images and noise comparison
 - PSNR and SSIM measurements
@@ -52,15 +57,29 @@ The processed results are stored in the `results/` folder and include:
 - object detection outputs
 - motion masks and optical flow visualization
 
-## 5. Comparison and discussion
+## 5. Restoration measurements
 
-The comparison shows that median filtering performs better on salt-and-pepper noise, while Gaussian filtering is more effective for Gaussian noise. Morphological operations help refine region boundaries. HOG provides gradient-based descriptors, and SIFT remains robust for matching transformed objects. YOLO often provides more general and accurate detections than Haar cascades, although the Haar method remains useful for constrained face detection tasks. In motion analysis, frame differencing is simple but sensitive to noise, background subtraction is better for moving-object segmentation, and optical flow provides directional motion estimation between frames.
+The same fixed random seed is used for both noise types, so the comparisons are reproducible within the same software environment.
 
-## 6. Conclusion
+| Noise | Restoration filter | PSNR (dB) | SSIM |
+|---|---|---:|---:|
+| Gaussian | Gaussian | 32.7408 | 0.8581 |
+| Gaussian | Median | 31.9501 | 0.8182 |
+| Salt-and-pepper | Gaussian | 27.6546 | 0.6334 |
+| Salt-and-pepper | Median | 33.8344 | 0.9094 |
 
-This assignment successfully implements the required computer vision workflows and produces a complete, reproducible solution. The codebase, generated dataset and outputs are organized neatly for academic submission and future extension.
+## 6. Comparison and discussion
 
-## 7. Git repository and demonstration video
+The measurements show that Gaussian filtering performs better for Gaussian noise, while median filtering is clearly better for salt-and-pepper noise. Morphological operations alter region boundaries as expected. SIFT produced 1,278 good matches initially, 1,259 after rotation, and 1,140 after resizing, demonstrating robust matching on transformed copies. The observed YOLO false positive is noted above; Haar detected the photographed face. Frame differencing highlights temporal change, MOG2 provides a warmed-up foreground mask, and Lucas-Kanade supplies directional motion vectors.
+
+## 7. Conclusion
+
+The photo-based restoration, segmentation, feature extraction, and object-detection workflows were run on the supplied personal photograph. Haar detected one face and YOLO returned two object detections. SIFT produced 1,278 good matches on the initial pair, 1,259 after rotation, and 1,140 after resizing. Motion estimation was run on the supplied 54-frame clip, producing frame-difference, MOG2, and optical-flow visualizations.
+
+The feature-matching pair is derived from one photograph rather than two independently captured views, and the video clip is short (about 1.8 seconds). Replace/add suitable media if the instructor expects a separately captured image or longer recording. The explanation video still needs to be recorded and linked in the submission.
+
+## 8. Git repository and demonstration video
 
 - Git repository: https://github.com/SnehPatel7704/Computer-Vision.git
 - Project explanation video: To be uploaded to the Google Drive location provided by the instructor.
+- The supplied motion video is short (54 frames, approximately 1.8 seconds); capture a longer clip if the instructor expects it. The project explanation video still needs to be recorded and uploaded before final submission.
